@@ -5,7 +5,8 @@ import "./Todos.scss";
 import { useEffect, useId, useState } from "react";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")));
+  const INITIAL_STATE = JSON.parse(localStorage.getItem("todos")) || [];
+  const [todos, setTodos] = useState(INITIAL_STATE);
   const id = useId();
 
   useEffect(() => {

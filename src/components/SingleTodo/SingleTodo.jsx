@@ -20,7 +20,6 @@ const SingleTodo = ({ todos, setTodos, todo }) => {
     <div className="todo-container">
       <div className="single-todo">
         {complete ? <s>{todo}</s> : <span>{todo}</span>}
-        {}
         <div className="icons-container">
           <div className="icon delete" onClick={onDeleteHandler}>
             <AiFillDelete />
