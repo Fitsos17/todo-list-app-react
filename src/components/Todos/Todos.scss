@@ -1,0 +1,24 @@
+.todos-container {
+  border-radius: 5px;
+  padding: 10px 20px;
+  height: 50vh;
+  width: 60vw;
+  background-color: #377d71;
+
+  .todos {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 5px;
+    width: 100%;
+    height: 75%;
+    background-color: #abc9ff;
+    overflow: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .todos-container {
+    width: 85vw;
+  }
+}

@@ -1,0 +1,41 @@
+.todo-container {
+  margin-bottom: -10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .single-todo {
+    position: relative;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #7858a6;
+    margin-top: 10px;
+    padding-left: 10px;
+    width: 85%;
+    height: 10%;
+    font-size: 1.5rem;
+
+    .form {
+      width: 40vw;
+    }
+
+    .icon {
+      display: inline;
+      margin-right: 10px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .single-todo {
+    width: 10000px;
+  }
+}
