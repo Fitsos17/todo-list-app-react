@@ -2,13 +2,21 @@ import { useState } from "react";
 import CustomInput from "../CustomInput/CustomInput.jsx";
 import "./InputForm.scss";
 
-const InputBox = ({ setTodos }) => {
+const InputBox = ({ setTodos, todos }) => {
   const [todo, setTodo] = useState("");
+  const isDuplicatedTodo = todos.find((selectedTodo) => selectedTodo === todo);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    setTodos((todos) => [...todos, todo]);
-    setTodo("");
+
+    if (todo.length === 0) {
+      alert("Todo can't be size 0!");
+    } else if (isDuplicatedTodo) {
+      alert("This todo is already in this list!");
+    } else {
+      setTodos((todos) => [...todos, todo]);
+      setTodo("");
+    }
   };
 
   const onChangeHandler = (e) => {
@@ -19,7 +27,7 @@ const InputBox = ({ setTodos }) => {
   return (
     <div className="input-box-container">
       <form className="form" autoComplete="off" onSubmit={onSubmitHandler}>
-        <label htmlFor="input" className="label" autoComplete="off">
+        <label htmlFor="input" className="label">
           Enter your todo:
         </label>
         <div className="input-container">

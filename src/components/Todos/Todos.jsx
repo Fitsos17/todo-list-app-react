@@ -15,7 +15,7 @@ const TodoList = () => {
 
   return (
     <div className="todos-container">
-      <InputBox setTodos={setTodos} />
+      <InputBox setTodos={setTodos} todos={todos} />
       <div className="todos">
         {todos.map((todo, idx) => (
           <SingleTodo
