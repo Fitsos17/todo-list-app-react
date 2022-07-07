@@ -2,9 +2,9 @@ import { createContext, useState } from "react";
 
 export const TodosContext = createContext({
   todos: JSON.parse(localStorage.getItem("todos")) || {},
-  setTodos: () => {},
+  setTodos: () => null,
   todo: "",
-  setTodo: () => {},
+  setTodo: () => null,
 });
 
 export const TodosContextProvider = ({ children }) => {

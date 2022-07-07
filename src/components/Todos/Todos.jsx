@@ -24,12 +24,7 @@ const TodoList = () => {
       />
       <div className="todos">
         {todos.map((todo, idx) => (
-          <SingleTodo
-            key={`${id}-${idx}`}
-            todos={todos}
-            todo={todo}
-            setTodos={setTodos}
-          />
+          <SingleTodo key={`${id}-${idx}`} todo={todo} />
         ))}
       </div>
     </div>

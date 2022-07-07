@@ -1,12 +1,20 @@
+import { useContext } from "react";
+import { TodosContext } from "../../contexts/TodosContext";
 import "./InputForm.scss";
 
-const InputBox = ({ setTodos, todos, todo, setTodo }) => {
+const InputBox = () => {
+  const { todos, setTodos, todo, setTodo } = useContext(TodosContext);
+  const isDuplicate = todos.find((selectedTodo) => selectedTodo.todo === todo);
+  console.log(isDuplicate);
+
   const id = Math.random();
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (todo.length === 0) {
       alert("Todo can't be size 0!");
+    } else if (isDuplicate) {
+      alert("Todo already exists!");
     } else {
       setTodos((todos) => [
         ...todos,
@@ -16,7 +24,7 @@ const InputBox = ({ setTodos, todos, todo, setTodo }) => {
           completed: false,
         },
       ]);
-      setTodo("");
+      document.querySelector("#input").value = "";
     }
   };
 
@@ -25,9 +33,7 @@ const InputBox = ({ setTodos, todos, todo, setTodo }) => {
     setTodo(e.target.value);
   };
 
-  const onClearHandler = () => {
-    setTodos([]);
-  };
+  const onClearHandler = () => setTodos([]);
 
   return (
     <div className="input-box-container">
@@ -40,7 +46,6 @@ const InputBox = ({ setTodos, todos, todo, setTodo }) => {
             type="text"
             id="input"
             className="input"
-            value={todo}
             onChange={onChangeHandler}
           />
           <button type="submit" className="btn">
