@@ -1,20 +1,21 @@
-import { useState } from "react";
-import CustomInput from "../CustomInput/CustomInput.jsx";
 import "./InputForm.scss";
 
-const InputBox = ({ setTodos, todos }) => {
-  const [todo, setTodo] = useState("");
-  const isDuplicatedTodo = todos.find((selectedTodo) => selectedTodo === todo);
+const InputBox = ({ setTodos, todos, todo, setTodo }) => {
+  const id = Math.random();
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
     if (todo.length === 0) {
       alert("Todo can't be size 0!");
-    } else if (isDuplicatedTodo) {
-      alert("This todo is already in this list!");
     } else {
-      setTodos((todos) => [...todos, todo]);
+      setTodos((todos) => [
+        ...todos,
+        {
+          todo,
+          todoId: id,
+          completed: false,
+        },
+      ]);
       setTodo("");
     }
   };
@@ -24,6 +25,10 @@ const InputBox = ({ setTodos, todos }) => {
     setTodo(e.target.value);
   };
 
+  const onClearHandler = () => {
+    setTodos([]);
+  };
+
   return (
     <div className="input-box-container">
       <form className="form" autoComplete="off" onSubmit={onSubmitHandler}>
@@ -31,13 +36,21 @@ const InputBox = ({ setTodos, todos }) => {
           Enter your todo:
         </label>
         <div className="input-container">
-          <CustomInput
-            onChange={onChangeHandler}
+          <input
+            type="text"
+            id="input"
+            className="input"
             value={todo}
-            isInputForm={true}
+            onChange={onChangeHandler}
           />
+          <button type="submit" className="btn">
+            Add Todo
+          </button>
         </div>
       </form>
+      <button className="btn-clear" onClick={onClearHandler}>
+        Clear All
+      </button>
     </div>
   );
 };

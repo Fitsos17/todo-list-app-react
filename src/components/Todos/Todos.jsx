@@ -2,11 +2,12 @@ import SingleTodo from "../SingleTodo/SingleTodo.jsx";
 import InputBox from "../InputBox/InputForm.jsx";
 
 import "./Todos.scss";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useContext } from "react";
+import { TodosContext } from "../../contexts/TodosContext.js";
 
 const TodoList = () => {
-  const INITIAL_STATE = JSON.parse(localStorage.getItem("todos")) || [];
-  const [todos, setTodos] = useState(INITIAL_STATE);
+  const { todos, todo, setTodo, setTodos } = useContext(TodosContext);
+
   const id = useId();
 
   useEffect(() => {
@@ -15,7 +16,12 @@ const TodoList = () => {
 
   return (
     <div className="todos-container">
-      <InputBox setTodos={setTodos} todos={todos} />
+      <InputBox
+        setTodos={setTodos}
+        todos={todos}
+        todo={todo}
+        setTodo={setTodo}
+      />
       <div className="todos">
         {todos.map((todo, idx) => (
           <SingleTodo
