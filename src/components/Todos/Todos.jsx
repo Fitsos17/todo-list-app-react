@@ -6,7 +6,7 @@ import { useEffect, useId, useContext } from "react";
 import { TodosContext } from "../../contexts/TodosContext.js";
 
 const TodoList = () => {
-  const { todos, todo, setTodo, setTodos } = useContext(TodosContext);
+  const { todos } = useContext(TodosContext);
 
   const id = useId();
 
@@ -16,12 +16,7 @@ const TodoList = () => {
 
   return (
     <div className="todos-container">
-      <InputBox
-        setTodos={setTodos}
-        todos={todos}
-        todo={todo}
-        setTodo={setTodo}
-      />
+      <InputBox />
       <div className="todos">
         {todos.map((todo, idx) => (
           <SingleTodo key={`${id}-${idx}`} todo={todo} />

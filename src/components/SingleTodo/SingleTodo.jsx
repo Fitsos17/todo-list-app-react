@@ -9,48 +9,29 @@ const SingleTodo = ({ todo }) => {
   const [edit, setEdit] = useState(false);
   const [newTodo, setNewTodo] = useState(todo);
 
-  const { todos, setTodos } = useContext(TodosContext);
+  const { completedTodo, deleteTodo, editTodo } = useContext(TodosContext);
 
-  const onDeleteHandler = () => {
-    const filteredTodos = todos.filter(
-      (selectedTodo) => selectedTodo.todoId !== todo.todoId
-    );
-    setTodos(filteredTodos);
-  };
+  const onEditHandler = (e) => setEdit(!edit);
 
-  const onEditHandler = () => setEdit(!edit);
-
-  const onSubmitEditHandler = (e) => {
-    e.preventDefault();
-    setTodos(
-      todos.map((selectedTodo) =>
-        selectedTodo.todoId === todo.todoId
-          ? { ...todo, todo: newTodo.todo }
-          : selectedTodo
-      )
-    );
-    setEdit(false);
-  };
-
-  const onChangeEditHandler = (e) => {
-    e.preventDefault();
-
+  const onChangeEditHandler = (e) =>
     setNewTodo({ ...todo, todo: e.target.value });
-  };
 
-  const onCompleteHandler = () => {
-    const newStateArr = [...todos];
-    let index = newStateArr.indexOf(todo);
-    newStateArr[index] = { ...todo, completed: !todo.completed };
-    setTodos(newStateArr);
-  };
+  const onSubmitEditHandler = () => editTodo(todo, newTodo, setEdit);
+
+  const onCompleteHandler = (e) => completedTodo(todo);
+
+  const onDeleteHandler = (e) => deleteTodo(todo);
 
   return (
     <div className="todo-container">
       <div className="single-todo">
         {edit ? (
           <form onSubmit={onSubmitEditHandler}>
-            <input value={newTodo.todo} onChange={onChangeEditHandler} />
+            <input
+              value={newTodo.todo}
+              autoFocus
+              onChange={onChangeEditHandler}
+            />
             <button type="submit">Done</button>
           </form>
         ) : todo.completed ? (

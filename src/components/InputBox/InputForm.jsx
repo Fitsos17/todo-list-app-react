@@ -1,39 +1,19 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { TodosContext } from "../../contexts/TodosContext";
 import "./InputForm.scss";
 
 const InputBox = () => {
-  const { todos, setTodos, todo, setTodo } = useContext(TodosContext);
-  const isDuplicate = todos.find((selectedTodo) => selectedTodo.todo === todo);
-  console.log(isDuplicate);
+  const [todo, setTodo] = useState("");
+  const { submitTodo, clearAllTodos } = useContext(TodosContext);
 
-  const id = Math.random();
-
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    if (todo.length === 0) {
-      alert("Todo can't be size 0!");
-    } else if (isDuplicate) {
-      alert("Todo already exists!");
-    } else {
-      setTodos((todos) => [
-        ...todos,
-        {
-          todo,
-          todoId: id,
-          completed: false,
-        },
-      ]);
-      document.querySelector("#input").value = "";
-    }
-  };
+  const onSubmitHandler = (e) => submitTodo(e, todo);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
     setTodo(e.target.value);
   };
 
-  const onClearHandler = () => setTodos([]);
+  const onClearHandler = () => clearAllTodos();
 
   return (
     <div className="input-box-container">
