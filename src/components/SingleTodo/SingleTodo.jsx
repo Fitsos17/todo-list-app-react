@@ -16,11 +16,11 @@ const SingleTodo = ({ todo }) => {
   const onChangeEditHandler = (e) =>
     setNewTodo({ ...todo, todo: e.target.value });
 
-  const onSubmitEditHandler = () => editTodo(todo, newTodo, setEdit);
+  const onSubmitEditHandler = (e) => editTodo(e, todo, newTodo, setEdit);
 
-  const onCompleteHandler = (e) => completedTodo(todo);
+  const onCompleteHandler = () => completedTodo(todo);
 
-  const onDeleteHandler = (e) => deleteTodo(todo);
+  const onDeleteHandler = () => deleteTodo(todo);
 
   return (
     <div className="todo-container">

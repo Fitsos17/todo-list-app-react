@@ -1,15 +1,21 @@
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+
+import { ListsContext } from "../../contexts/ListsContext";
+
 import "./Sidebar.scss";
 
-import React, { useRef } from "react";
-
 const Sidebar = () => {
-  const sidebarRef = useRef(null);
-  // const onClickHandler = () => {
-  //   sidebarRef.current.blur();
-  // };
+  const [list, setList] = useState("");
+  const { lists, submitNewList } = useContext(ListsContext);
+
+  const onChangeHandler = (e) => {
+    setList(e.target.value);
+  };
+  const onSubmitHandler = (e) => submitNewList(e, list, setList);
 
   return (
-    <label ref={sidebarRef}>
+    <label>
       <input type="checkbox" className="sidebar_input" />
       <div className="toggle">
         <span className="top_line common"></span>
@@ -19,16 +25,24 @@ const Sidebar = () => {
       <div className="slide">
         <h1>Lists</h1>
         <ul>
-          <li>
-            <a href="#">Main</a>
-          </li>
-          <li>
-            <a href="#">Work</a>
-          </li>
-          <li>
-            <a href="#">Hobby</a>
-          </li>
+          {lists.map((list) => (
+            <li key={list.listId}>
+              <Link to={`/${list.list}`}>{list.list}</Link>
+            </li>
+          ))}
         </ul>
+        <form autoComplete="off" onSubmit={onSubmitHandler}>
+          <label htmlFor="input-sidebar">Enter new list</label>
+          <input
+            type="text"
+            id="input-sidebar"
+            value={list}
+            onChange={onChangeHandler}
+          />
+          <button id="submit-list-btn" type="submit">
+            Submit List
+          </button>
+        </form>
       </div>
     </label>
   );

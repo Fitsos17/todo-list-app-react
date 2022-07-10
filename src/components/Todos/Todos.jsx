@@ -1,26 +1,26 @@
 import SingleTodo from "../SingleTodo/SingleTodo.jsx";
 import InputBox from "../InputBox/InputForm.jsx";
+import { TodosContext } from "../../contexts/TodosContext.js";
 
 import "./Todos.scss";
-import { useEffect, useId, useContext } from "react";
-import { TodosContext } from "../../contexts/TodosContext.js";
+import { useId, useContext } from "react";
+import { useParams } from "react-router-dom";
 
 const TodoList = () => {
   const { todos } = useContext(TodosContext);
-
   const id = useId();
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  const { list } = useParams();
 
   return (
     <div className="todos-container">
+      <div className="current-list">On {list} list</div>
       <InputBox />
       <div className="todos">
-        {todos.map((todo, idx) => (
-          <SingleTodo key={`${id}-${idx}`} todo={todo} />
-        ))}
+        {todos.map((todo, idx) =>
+          todo.list === list ? (
+            <SingleTodo key={`${id}-${idx}`} todo={todo} />
+          ) : null
+        )}
       </div>
     </div>
   );

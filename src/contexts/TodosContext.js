@@ -1,7 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const TodosContext = createContext({
-  todos: JSON.parse(localStorage.getItem("todos")) || {},
+  todos: JSON.parse(localStorage.getItem("todos")) || [],
   setTodos: () => null,
   submitTodo: () => null,
   clearAllTodos: () => null,
@@ -11,10 +11,14 @@ export const TodosContext = createContext({
 });
 
 export const TodosContextProvider = ({ children }) => {
-  const INITIAL_TODOS = JSON.parse(localStorage.getItem("todos")) || {};
+  const INITIAL_TODOS = JSON.parse(localStorage.getItem("todos")) || [];
   const [todos, setTodos] = useState(INITIAL_TODOS);
 
-  const submitTodo = (event, todo) => {
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  const submitTodo = (event, todo, list) => {
     const isDuplicate = todos.find(
       (selectedTodo) => selectedTodo.todo === todo
     );
@@ -32,13 +36,16 @@ export const TodosContextProvider = ({ children }) => {
           todo,
           todoId: id,
           completed: false,
+          list,
         },
       ]);
       document.querySelector("#input").value = "";
     }
   };
 
-  const clearAllTodos = () => setTodos([]);
+  const clearAllTodos = (list) => {
+    setTodos(todos.filter((currentTodo) => currentTodo.list !== list));
+  };
 
   const deleteTodo = (todo) => {
     const filteredTodos = todos.filter(
@@ -54,15 +61,21 @@ export const TodosContextProvider = ({ children }) => {
     setTodos(newStateArr);
   };
 
-  const editTodo = (todo, newTodo, setEdit) => {
-    setTodos(
-      todos.map((selectedTodo) =>
-        selectedTodo.todoId === todo.todoId
-          ? { ...todo, todo: newTodo.todo }
-          : selectedTodo
-      )
-    );
-    setEdit(false);
+  const editTodo = (e, todo, newTodo, setEdit) => {
+    e.preventDefault();
+
+    if (newTodo.todo.length === 0) {
+      alert("Length of todo can not be 0!");
+    } else {
+      setTodos(
+        todos.map((selectedTodo) =>
+          selectedTodo.todoId === todo.todoId
+            ? { ...todo, todo: newTodo.todo }
+            : selectedTodo
+        )
+      );
+      setEdit(false);
+    }
   };
 
   const value = {

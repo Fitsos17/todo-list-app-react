@@ -7,6 +7,7 @@
 
   .single-todo {
     position: relative;
+    z-index: auto;
     padding: 20px;
     border-radius: 5px;
     display: flex;
@@ -32,4 +33,7 @@
       }
     }
   }
+}
+
+@media (max-width: 450px) {
 }
