@@ -22,8 +22,18 @@ export const ListsContextProvider = ({ children }) => {
 
   const submitNewList = (e, list, setList) => {
     e.preventDefault();
-    setLists([...lists, { list, listId: id }]);
-    setList("");
+    const isDuplicateList = lists.find(
+      (selectedList) => selectedList.list === list
+    );
+
+    if (list.length === 0) {
+      alert("List can't be size 0!");
+    } else if (isDuplicateList) {
+      alert("List exists!");
+    } else {
+      setLists([...lists, { list, listId: id }]);
+      setList("");
+    }
   };
 
   const value = { lists, setLists, submitNewList };

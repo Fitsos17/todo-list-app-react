@@ -27,7 +27,7 @@ const Sidebar = () => {
         <ul>
           {lists.map((list) => (
             <li key={list.listId}>
-              <Link to={`/${list.list}`}>{list.list}</Link>
+              <Link to={`${list.list}`}>{list.list}</Link>
             </li>
           ))}
         </ul>
