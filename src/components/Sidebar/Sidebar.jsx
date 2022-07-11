@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 import { ListsContext } from "../../contexts/ListsContext";
@@ -28,12 +28,11 @@ const Sidebar = () => {
         <h1>Lists</h1>
         <ul>
           {lists.map((list) => (
-            <li key={list.listId}>
-              <span
-                onClick={() => navigate(`todo-list-app-react/${list.list}`)}
-              >
-                {list.list}
-              </span>
+            <li
+              key={list.listId}
+              onClick={() => navigate(`todo-list-app-react/${list.list}`)}
+            >
+              <span>{list.list}</span>
             </li>
           ))}
         </ul>
