@@ -10,4 +10,4 @@ Hi everyone. This is my todo list application. I hope you liked it
 I'll maybe later on add typescript or bootstrap in my app.
 
 ### Link for website
-https://fitsos17.github.io/todo-list-app-react/
+[Link for netlify](https://62cc27640142470009a45fe6--iridescent-kitten-63fd6e.netlify.app/main)
