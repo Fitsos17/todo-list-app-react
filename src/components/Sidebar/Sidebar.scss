@@ -29,13 +29,12 @@ ul {
     list-style: none;
 
     &:hover {
-      cursor: pointer;
       transition: 0.2s ease-out;
       color: #fff;
       background-color: $purple;
     }
 
-    span {
+    a {
       margin-left: 2px;
       font-size: 1.5rem;
       overflow: hidden;

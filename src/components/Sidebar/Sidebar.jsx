@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { ListsContext } from "../../contexts/ListsContext";
 
@@ -9,7 +8,6 @@ import "./Sidebar.scss";
 const Sidebar = () => {
   const [list, setList] = useState("");
   const { lists, submitNewList } = useContext(ListsContext);
-  const navigate = useNavigate();
 
   const onChangeHandler = (e) => {
     setList(e.target.value);
@@ -28,11 +26,8 @@ const Sidebar = () => {
         <h1>Lists</h1>
         <ul>
           {lists.map((list) => (
-            <li
-              key={list.listId}
-              onClick={() => navigate(`todo-list-app-react/${list.list}`)}
-            >
-              <span>{list.list}</span>
+            <li key={list.listId}>
+              <Link to={list.list}>{list.list}</Link>
             </li>
           ))}
         </ul>

@@ -18,8 +18,8 @@ function App() {
       <Sidebar />
       <div className="todo-list">
         <Routes>
-          <Route path="todo-list-app-react/" element={<RedirectToMain />} />
-          <Route path="todo-list-app-react/:list" element={<TodoList />} />
+          <Route path="/" element={<RedirectToMain />} />
+          <Route path="/:list" element={<TodoList />} />
         </Routes>
       </div>
     </div>
