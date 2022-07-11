@@ -9,7 +9,7 @@ function App() {
   const RedirectToMain = () => {
     const navigate = useNavigate();
     useEffect(() => {
-      navigate("todo-list-app-react/main");
+      navigate("main");
     });
     return null;
   };
