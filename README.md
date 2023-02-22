@@ -10,6 +10,4 @@ Hi everyone. This is my todo list application. I hope you liked it
 
 ### Link for website
 
-<<<<<<< HEAD
-
 [Link for netlify](https://nick-todo-list-app-react.netlify.app/)
