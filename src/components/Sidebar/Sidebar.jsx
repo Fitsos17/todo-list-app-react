@@ -12,7 +12,11 @@ const Sidebar = () => {
   const onChangeHandler = (e) => {
     setList(e.target.value);
   };
-  const onSubmitHandler = (e) => submitNewList(e, list, setList);
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    submitNewList(list);
+    setList("");
+  };
 
   return (
     <label>
@@ -32,7 +36,7 @@ const Sidebar = () => {
           ))}
         </ul>
         <form autoComplete="off" onSubmit={onSubmitHandler}>
-          <label htmlFor="input-sidebar">Enter new list</label>
+          <label htmlFor="input-sidebar">Enter name of your new list: </label>
           <input
             type="text"
             id="input-sidebar"

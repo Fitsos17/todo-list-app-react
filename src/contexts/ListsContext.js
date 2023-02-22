@@ -20,8 +20,7 @@ export const ListsContextProvider = ({ children }) => {
     localStorage.setItem("lists", JSON.stringify(lists));
   }, [lists]);
 
-  const submitNewList = (e, list, setList) => {
-    e.preventDefault();
+  const submitNewList = (list) => {
     const isDuplicateList = lists.find(
       (selectedList) => selectedList.list === list
     );
@@ -32,7 +31,6 @@ export const ListsContextProvider = ({ children }) => {
       alert("List exists!");
     } else {
       setLists([...lists, { list, listId: id }]);
-      setList("");
     }
   };
 

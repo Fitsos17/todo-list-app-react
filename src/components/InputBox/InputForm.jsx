@@ -14,7 +14,11 @@ const InputBox = () => {
     setTodo(e.target.value);
   };
 
-  const onSubmitHandler = (e) => submitTodo(e, todo, list);
+  const onSubmitHandler = (e) => {
+    submitTodo(e, todo, list);
+    setTodo("");
+    console.log(todo);
+  };
   const onClearHandler = () => clearAllTodos(list);
 
   return (

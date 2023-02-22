@@ -1,4 +1,5 @@
 $purple: #8000ff;
+$border-shadow-color: rgba(0, 0, 0, 0.3);
 
 .slide {
   position: absolute;
@@ -26,7 +27,18 @@ ul {
   padding: 0;
   li {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
     list-style: none;
+
+    button {
+      background-color: inherit;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     &:hover {
       transition: 0.2s ease-out;
@@ -50,7 +62,6 @@ ul {
 .sidebar_input {
   display: none;
   visibility: hidden;
-  -webkit-appearance: none;
 
   &:checked ~ .toggle .top_line {
     left: 2px;
@@ -73,7 +84,7 @@ ul {
   }
   &:checked ~ .slide {
     transform: translateX(0);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px $border-shadow-color;
   }
 }
 
@@ -87,7 +98,7 @@ ul {
   left: 15px;
   border-radius: 2px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px $border-shadow-color;
 
   & .common {
     position: absolute;
@@ -118,7 +129,8 @@ ul {
 }
 
 #input-sidebar {
-  border: none;
+  position: relative;
+  display: inline;
   width: 98%;
   &:focus {
     outline: none;
@@ -134,12 +146,6 @@ ul {
     cursor: pointer;
     filter: brightness(1.2);
     transition: 0.5s ease-in;
-  }
-}
-
-.delete-btn {
-  &:hover {
-    cursor: pointer;
   }
 }
 
